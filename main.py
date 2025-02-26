@@ -18,6 +18,7 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill((0, 0, 0))  # Fills the screen with black background
+        player.update(dt) # Updates the player to allow for movement
         player.draw(screen) # Draws the player on the screen
         pygame.display.flip()  # Refresh screen
         dt = clock.tick(60) / 1000.0  # Limits FPS to 60 and calculates delta time
