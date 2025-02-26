@@ -1,23 +1,23 @@
-# this allows us to use code from
-# the open-source pygame library
-# throughout this file
-import pygame
-from constants import *
+import pygame #Imports the pygame library
+from constants import * #Imports the constants from the constants.py file
 
 
 def main():
-    pygame.init()
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    print("Starting Asteroids!")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
+    pygame.init() #Initiates pygame
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) #Creates a window
+    print("Starting Asteroids!") #Tells the user that the game is starting
+    print(f"Screen width: {SCREEN_WIDTH}") #Tells the user the width of the screen
+    print(f"Screen height: {SCREEN_HEIGHT}") #Tells the user the height of the screen
+    clock = pygame.time.Clock() #Creates a clock to control the frame rate
+    dt = 0 #Creates a variable to store the time since the last frame update
 
-    while True:
-        for event in pygame.event.get():
+    while True: #Main game loop
+        for event in pygame.event.get(): #Checks if the user has closed the window
             if event.type == pygame.QUIT:
                 return
-        screen.fill((0, 0, 0))  # Fill screen with black
+        screen.fill((0, 0, 0))  # Fills the screen with black background
         pygame.display.flip()  # Refresh screen
+        dt = clock.tick(60) / 1000.0  # Limits FPS to 60 and calculates delta time
 
 if __name__ == "__main__":
     main()
