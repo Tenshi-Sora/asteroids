@@ -1,4 +1,5 @@
 import pygame #Imports the pygame library
+from player import Player #Imports the player class from the player.py file
 from constants import * #Imports the constants from the constants.py file
 
 
@@ -10,12 +11,14 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}") #Tells the user the height of the screen
     clock = pygame.time.Clock() #Creates a clock to control the frame rate
     dt = 0 #Creates a variable to store the time since the last frame update
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) #Creates a player object in the center of the screen
 
     while True: #Main game loop
         for event in pygame.event.get(): #Checks if the user has closed the window
             if event.type == pygame.QUIT:
                 return
         screen.fill((0, 0, 0))  # Fills the screen with black background
+        player.draw(screen) # Draws the player on the screen
         pygame.display.flip()  # Refresh screen
         dt = clock.tick(60) / 1000.0  # Limits FPS to 60 and calculates delta time
 
