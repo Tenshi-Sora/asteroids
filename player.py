@@ -1,5 +1,5 @@
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED
+from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
 import pygame
 
 class Player(CircleShape):
@@ -30,3 +30,12 @@ class Player(CircleShape):
             self.rotate(-dt)
         if keys[pygame.K_d]: # If the "D" arrow key is pressed, rotate the player to the right
             self.rotate(dt)
+        if keys[pygame.K_w]: # If the "W" arrow key is pressed, move the player forward
+            self.move(dt)
+        if keys[pygame.K_s]: # If the "S" arrow key is pressed, move the player backward
+            self.move(-dt)
+    
+    # The code below was provided by the class instructor and is used to maintain focus on the main lesson of the class
+    def move (self, dt): # Moves the player in the direction they are facing
+        forward = pygame.Vector2(0, 1).rotate(self.rotation)
+        self.position += forward * PLAYER_SPEED * dt
