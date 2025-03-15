@@ -29,6 +29,10 @@ def main():
                 return
         screen.fill((0, 0, 0))  # Fills the screen with black background
         updatable.update(dt)  # Updates all objects in the "updatable" group
+        for asteroid in asteroids: # Checks if the player has collided with any asteroids
+            if player.collision(asteroid):
+                print("Game over!")
+                return
         for obj in drawable: # Draws all objects in the "drawable" group
             obj.draw(screen)  
         player.update(dt) # Updates the player to allow for movement
