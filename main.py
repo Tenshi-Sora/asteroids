@@ -3,6 +3,7 @@ from player import Player # Imports the player class from the player.py file
 from asteroid import Asteroid  # Imports the Asteroid class from the asteroid.py file
 from constants import * # Imports the constants from the constants.py file
 from asteroidfield import AsteroidField # Imports the AsteroidField class from the asteroidfield.py file
+from shot import Shot # Imports the Shot class from the shot.py file
 
 
 def main():
@@ -16,12 +17,15 @@ def main():
     updatable = pygame.sprite.Group() # Creates a group to store all the objects that need to be updated
     drawable = pygame.sprite.Group() # Creates a group to store all the objects that need to be drawn
     asteroids = pygame.sprite.Group() # Creates a group to store all the asteroids
+    shots = pygame.sprite.Group()  # Creates a group to store all the shots
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) # Creates a player object in the center of the screen
     updatable.add(player) # Adds the player to the updatable group
     drawable.add(player) # Adds the player to the drawable group
     Asteroid.containers = (asteroids, updatable, drawable) # Set the containers field of the Asteroid class
     AsteroidField.containers = (updatable,) # Set the containers field of the AsteroidField class
     asteroid_field = AsteroidField() # Create a new AsteroidField object
+    Shot.containers = (shots, updatable, drawable) # Set the containers field of the Shot class
+
 
     while True: # Main game loop
         for event in pygame.event.get(): # Checks if the user has closed the window

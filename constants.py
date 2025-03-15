@@ -11,3 +11,8 @@ PLAYER_RADIUS = 20 # The radius of the player object
 PLAYER_TURN_SPEED = 300 # degrees per second clockwise or counterclockwise
 
 PLAYER_SPEED = 200 # pixels per second forward or backward
+
+SHOT_RADIUS = 5 # The radius of the ship's shots
+PLAYER_SHOOT_SPEED = 500 # The speed of the ship's shots in pixels per second
+
+PLAYER_SHOOT_COOLDOWN = 0.3 # The time between shots in seconds
