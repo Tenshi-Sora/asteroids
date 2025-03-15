@@ -28,17 +28,28 @@ def main():
 
 
     while True: # Main game loop
+        
         for event in pygame.event.get(): # Checks if the user has closed the window
             if event.type == pygame.QUIT:
                 return
+            
         screen.fill((0, 0, 0))  # Fills the screen with black background
         updatable.update(dt)  # Updates all objects in the "updatable" group
+        
         for asteroid in asteroids: # Checks if the player has collided with any asteroids
             if player.collision(asteroid):
                 print("Game over!")
                 return
+            
+        for asteroid in asteroids: # Check for collisions between shots and asteroids
+            for shot in shots:
+                if shot.collision(asteroid):
+                    shot.kill()
+                    asteroid.split()
+
         for obj in drawable: # Draws all objects in the "drawable" group
             obj.draw(screen)  
+
         player.update(dt) # Updates the player to allow for movement
         player.draw(screen) # Draws the player on the screen
         pygame.display.flip()  # Refresh screen

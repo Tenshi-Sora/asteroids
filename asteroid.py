@@ -1,6 +1,8 @@
+import pygame
+import random
 from circleshape import CircleShape
 from constants import ASTEROID_MIN_RADIUS, ASTEROID_MAX_RADIUS, ASTEROID_KINDS, ASTEROID_SPAWN_RATE
-import pygame
+
 
 class Asteroid(CircleShape):
     containers = None # This is used to store the groups that the asteroid will be added to
@@ -16,3 +18,19 @@ class Asteroid(CircleShape):
     
     def update(self, dt): # Moves the asteroid
         self.position += self.velocity * dt # Moves the asteroid based on its velocity and the time since the last frame update
+
+    def split(self): # Splits the asteroid into two smaller asteroids if it is larger than the minimum radius
+        self.kill() # Removes the asteroid from the game
+        if self.radius <= ASTEROID_MIN_RADIUS: # Checks if the asteroid is larger than the minimum radius
+            return
+        else:  # Creates two smaller asteroids
+            random_angle = random.uniform(20, 50)  # Generates a random angle between 20 and 50 degrees
+            new_radius = self.radius - ASTEROID_MIN_RADIUS  # Compute the new radius of the smaller asteroids
+
+            # Create two new velocity vectors rotated by random_angle and -random_angle
+            velocity1 = self.velocity.rotate(random_angle) * 1.2
+            velocity2 = self.velocity.rotate(-random_angle) * 1.2
+
+            # Create two new Asteroid objects at the current asteroid position with the new radius
+            Asteroid(self.position.x, self.position.y, new_radius).velocity = velocity1
+            Asteroid(self.position.x, self.position.y, new_radius).velocity = velocity2
